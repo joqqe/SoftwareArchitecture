@@ -1,13 +1,6 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using NUnit.Framework;
-using SoftwareArchitecture.Application.Common.Interfaces;
-using SoftwareArchitecture.Domain.Entities;
 using SoftwareArchitecture.Infrastructure.Persistence;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SoftwareArchitecture.Application.IntegrationTests
 {

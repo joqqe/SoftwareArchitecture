@@ -24,6 +24,21 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
         }
 
         [Test]
+        public async Task ShouldDeleteTodo()
+        {
+            var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
+
+            var newTitle = "Test todo";
+            var newId = await todoService.Create(newTitle);
+
+            await todoService.Delete(newId);
+
+            var actual = await todoService.GetAll();
+
+            Assert.IsNull(actual.FirstOrDefault(t => t.Id == newId));
+        }
+
+        [Test]
         public async Task ShouldUpdateTitleOfTodo()
         {
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));

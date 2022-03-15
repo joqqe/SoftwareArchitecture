@@ -1,17 +1,17 @@
-﻿using SoftwareArchitecture.Domain.Entities;
-using SoftwareArchitecture.Domain.Enums;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using SoftwareArchitecture.Domain.Enums;
+using SoftwareArchitecture.Domain.Entities;
 
 namespace SoftwareArchitecture.Application.Common.Interfaces
 {
     public interface ITodoItemService
     {
-        Task<int> CreateTodo(string title);
-        Task DeleteTodo(int id);
-        Task<List<TodoItem>> GetTodos();
-        Task UpdateTodoDone(int id, bool done);
-        Task UpdateTodoPriority(int id, PriorityLevel priority);
-        Task UpdateTodoTitle(int id, string title);
+        Task<int> Create(string title);
+        Task Delete(int id);
+        Task<List<TodoItem>> GetAll();
+        Task UpdateDone(int id, bool done);
+        Task UpdatePriority(int id, PriorityLevel priority);
+        Task UpdateTitle(int id, string title);
     }
 }

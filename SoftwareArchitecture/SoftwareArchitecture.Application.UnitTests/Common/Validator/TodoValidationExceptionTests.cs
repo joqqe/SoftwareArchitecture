@@ -13,7 +13,7 @@ namespace SoftwareArchitecture.Application.UnitTests.Common.Validator
 
             try
             {
-                TodoValidator.ValidateTitle(title);
+                TodoItemValidator.Title(title);
                 Assert.Pass();
             }
             catch (ValidationException)
@@ -29,7 +29,7 @@ namespace SoftwareArchitecture.Application.UnitTests.Common.Validator
 
             try
             {
-                TodoValidator.ValidateTitle(title);
+                TodoItemValidator.Title(title);
                 Assert.Fail();
             }
             catch (ValidationException)
@@ -45,7 +45,7 @@ namespace SoftwareArchitecture.Application.UnitTests.Common.Validator
 
             try
             {
-                TodoValidator.ValidateTitle(title);
+                TodoItemValidator.Title(title);
                 Assert.Fail();
             }
             catch (ValidationException)
@@ -61,7 +61,7 @@ namespace SoftwareArchitecture.Application.UnitTests.Common.Validator
 
             try
             {
-                TodoValidator.ValidateTitle(title);
+                TodoItemValidator.Title(title);
                 Assert.Fail();
             }
             catch (ValidationException)

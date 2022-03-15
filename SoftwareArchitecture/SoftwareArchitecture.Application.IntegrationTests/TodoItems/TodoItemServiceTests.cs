@@ -15,9 +15,9 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
 
             var newTitle = "Test todo";
-            var newId = await todoService.CreateTodo(newTitle);
+            var newId = await todoService.Create(newTitle);
             
-            var actual = (await todoService.GetTodos())
+            var actual = (await todoService.GetAll())
                 .FirstOrDefault(x => x.Id == newId);
 
             Assert.AreSame(newTitle, actual.Title);
@@ -29,12 +29,12 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
 
             var initialTitle = "Test todo 1";
-            var newId = await todoService.CreateTodo(initialTitle);
+            var newId = await todoService.Create(initialTitle);
 
             var newTitle = "Test todo 2";
-            await todoService.UpdateTodoTitle(newId, newTitle);
+            await todoService.UpdateTitle(newId, newTitle);
 
-            var actual = (await todoService.GetTodos())
+            var actual = (await todoService.GetAll())
                 .FirstOrDefault(x => x.Id == newId);
 
             Assert.AreSame(newTitle, actual.Title);
@@ -46,11 +46,11 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
 
             var initialTitle = "Test todo";
-            var newId = await todoService.CreateTodo(initialTitle);
+            var newId = await todoService.Create(initialTitle);
 
-            await todoService.UpdateTodoDone(newId, true);
+            await todoService.UpdateDone(newId, true);
 
-            var actual = (await todoService.GetTodos())
+            var actual = (await todoService.GetAll())
                 .FirstOrDefault(x => x.Id == newId);
 
             Assert.IsTrue(actual.Done);
@@ -62,11 +62,11 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
 
             var initialTitle = "Test todo";
-            var newId = await todoService.CreateTodo(initialTitle);
+            var newId = await todoService.Create(initialTitle);
 
-            await todoService.UpdateTodoPriority(newId, Domain.Enums.PriorityLevel.High);
+            await todoService.UpdatePriority(newId, Domain.Enums.PriorityLevel.High);
 
-            var actual = (await todoService.GetTodos())
+            var actual = (await todoService.GetAll())
                 .FirstOrDefault(x => x.Id == newId);
 
             Assert.AreEqual(Domain.Enums.PriorityLevel.High, actual.Priority);

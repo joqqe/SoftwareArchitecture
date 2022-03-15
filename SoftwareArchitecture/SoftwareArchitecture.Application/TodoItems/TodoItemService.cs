@@ -19,7 +19,7 @@ namespace SoftwareArchitecture.Application.TodoItems
             this.context = context;
         }
 
-        public async Task<List<TodoItem>> GetTodos()
+        public async Task<List<TodoItem>> GetAll()
         {
             return await context.TodoItems
                 .AsNoTracking()
@@ -27,9 +27,9 @@ namespace SoftwareArchitecture.Application.TodoItems
                 .ToListAsync();
         }
 
-        public async Task<int> CreateTodo(string title)
+        public async Task<int> Create(string title)
         {
-            TodoValidator.ValidateTitle(title);
+            TodoItemValidator.Title(title);
 
             var entity = new TodoItem
             {
@@ -45,7 +45,7 @@ namespace SoftwareArchitecture.Application.TodoItems
             return entity.Id;
         }
 
-        public async Task DeleteTodo(int id)
+        public async Task Delete(int id)
         {
             var entity = await context.TodoItems
                 .FindAsync(new object[] { id }, default);
@@ -58,9 +58,9 @@ namespace SoftwareArchitecture.Application.TodoItems
             await context.SaveChangesAsync(default);
         }
 
-        public async Task UpdateTodoTitle(int id, string title)
+        public async Task UpdateTitle(int id, string title)
         {
-            TodoValidator.ValidateTitle(title);
+            TodoItemValidator.Title(title);
 
             var entity = await context.TodoItems
                 .FindAsync(new object[] { id }, default);
@@ -73,7 +73,7 @@ namespace SoftwareArchitecture.Application.TodoItems
             await context.SaveChangesAsync(default);
         }
 
-        public async Task UpdateTodoDone(int id, bool done)
+        public async Task UpdateDone(int id, bool done)
         {
             var entity = await context.TodoItems
                 .FindAsync(new object[] { id }, default);
@@ -86,7 +86,7 @@ namespace SoftwareArchitecture.Application.TodoItems
             await context.SaveChangesAsync(default);
         }
 
-        public async Task UpdateTodoPriority(int id, PriorityLevel priority)
+        public async Task UpdatePriority(int id, PriorityLevel priority)
         {
             var entity = await context.TodoItems
                 .FindAsync(new object[] { id }, default);

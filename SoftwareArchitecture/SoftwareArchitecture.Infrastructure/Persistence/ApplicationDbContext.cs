@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SoftwareArchitecture.Domain.Entities;
 using SoftwareArchitecture.Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace SoftwareArchitecture.Infrastructure.Persistence
 {

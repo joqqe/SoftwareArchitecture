@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftwareArchitecture.Application.Common.Exceptions
 {
-    class ValidationException : Exception
+    public class ValidationException : Exception
     {
         public ValidationException()
         {

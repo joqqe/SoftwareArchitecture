@@ -24,7 +24,7 @@ namespace SoftwareArchitecture.Application
         {
             return await context.TodoItems
                 .AsNoTracking()
-                .OrderBy(t => t.Title)
+                .OrderBy(t => t.Priority)
                 .ToListAsync();
         }
 
@@ -35,6 +35,7 @@ namespace SoftwareArchitecture.Application
             var entity = new TodoItem
             {
                 Title = title,
+                Priority = PriorityLevel.None,
                 Done = false
             };
 
@@ -60,7 +61,7 @@ namespace SoftwareArchitecture.Application
             await context.SaveChangesAsync(default);
         }
 
-        public async Task UpdateTodo(int id, string title, bool done)
+        public async Task UpdateTodoTitle(int id, string title)
         {
             TodoValidator.ValidateTitle(title);
 
@@ -71,7 +72,32 @@ namespace SoftwareArchitecture.Application
                 throw new NotFoundException(nameof(TodoItem), id);
 
             entity.Title = title;
+
+            await context.SaveChangesAsync(default);
+        }
+
+        public async Task UpdateTodoDone(int id, bool done)
+        {
+            var entity = await context.TodoItems
+                .FindAsync(new object[] { id }, default);
+
+            if (entity == null)
+                throw new NotFoundException(nameof(TodoItem), id);
+
             entity.Done = done;
+
+            await context.SaveChangesAsync(default);
+        }
+
+        public async Task UpdateTodoPriority(int id, PriorityLevel priority)
+        {
+            var entity = await context.TodoItems
+                .FindAsync(new object[] { id }, default);
+
+            if (entity == null)
+                throw new NotFoundException(nameof(TodoItem), id);
+
+            entity.Priority = priority;
 
             await context.SaveChangesAsync(default);
         }

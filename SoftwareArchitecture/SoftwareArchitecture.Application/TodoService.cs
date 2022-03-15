@@ -7,6 +7,7 @@ using SoftwareArchitecture.Application.Common.Interfaces;
 using System.Threading;
 using SoftwareArchitecture.Application.Common.Exceptions;
 using SoftwareArchitecture.Domain.Enums;
+using SoftwareArchitecture.Application.Common.Validations;
 
 namespace SoftwareArchitecture.Application
 {
@@ -29,6 +30,8 @@ namespace SoftwareArchitecture.Application
 
         public async Task<int> CreateTodo(string title)
         {
+            TodoValidator.ValidateTitle(title);
+
             var entity = new TodoItem
             {
                 Title = title,
@@ -59,6 +62,8 @@ namespace SoftwareArchitecture.Application
 
         public async Task UpdateTodo(int id, string title, bool done)
         {
+            TodoValidator.ValidateTitle(title);
+
             var entity = await context.TodoItems
                 .FindAsync(new object[] { id }, default);
 
@@ -69,21 +74,6 @@ namespace SoftwareArchitecture.Application
             entity.Done = done;
 
             await context.SaveChangesAsync(default);
-        }
-
-        public async Task UpdateTodoDetails(int id, string note, PriorityLevel priority)
-        {
-            var entity = await context.TodoItems
-                .FindAsync(new object[] { id }, default);
-
-            if (entity == null)
-                throw new NotFoundException(nameof(TodoItem), id);
-
-            entity.Priority = priority;
-            entity.Note = note;
-
-            await context.SaveChangesAsync(default);
-
         }
     }
 }

@@ -3,19 +3,18 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SoftwareArchitecture.Domain.Entities;
-using SoftwareArchitecture.Application.Common.Interfaces;
-using System.Threading;
-using SoftwareArchitecture.Application.Common.Exceptions;
 using SoftwareArchitecture.Domain.Enums;
+using SoftwareArchitecture.Application.Common.Interfaces;
+using SoftwareArchitecture.Application.Common.Exceptions;
 using SoftwareArchitecture.Application.Common.Validations;
 
-namespace SoftwareArchitecture.Application
+namespace SoftwareArchitecture.Application.TodoItems
 {
-    public class TodoService
+    public class TodoItemService : ITodoItemService
     {
         private readonly IApplicationDbContext context;
 
-        public TodoService(IApplicationDbContext context)
+        public TodoItemService(IApplicationDbContext context)
         {
             this.context = context;
         }
@@ -42,8 +41,6 @@ namespace SoftwareArchitecture.Application
             context.TodoItems.Add(entity);
 
             await context.SaveChangesAsync(default);
-
-            //Todo is id correct?
 
             return entity.Id;
         }

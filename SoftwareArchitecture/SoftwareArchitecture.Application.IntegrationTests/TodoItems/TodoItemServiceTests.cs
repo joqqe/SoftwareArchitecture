@@ -1,9 +1,7 @@
-﻿using NUnit.Framework;
-using SoftwareArchitecture.Application.Common.Interfaces;
-using SoftwareArchitecture.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using SoftwareArchitecture.Application.Common.Interfaces;
 
 namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
 {

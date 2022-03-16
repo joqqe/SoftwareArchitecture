@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NUnit.Framework;
 using SoftwareArchitecture.Application.Common.Interfaces;
+using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItemCommand;
 using SoftwareArchitecture.Application.TodoItems.Queries.GetTodoItems;
 
 namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
@@ -10,44 +11,16 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
     public class TodoItemServiceTests : TestBase
     {
         [Test]
-        public async Task ShouldCreateTodo()
-        {
-            var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
-            var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
-
-            var newTitle = "Test todo";
-            var newId = await todoService.Create(newTitle);
-            
-            var actual = (await mediator.Send(new GetTodoItemsQuery()))
-                .FirstOrDefault(x => x.Id == newId);
-
-            Assert.AreSame(newTitle, actual.Title);
-        }
-
-        [Test]
-        public async Task ShouldDeleteTodo()
-        {
-            var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
-            var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
-
-            var newTitle = "Test todo";
-            var newId = await todoService.Create(newTitle);
-
-            await todoService.Delete(newId);
-
-            var actual = await mediator.Send(new GetTodoItemsQuery());
-
-            Assert.IsNull(actual.FirstOrDefault(t => t.Id == newId));
-        }
-
-        [Test]
         public async Task ShouldUpdateTitleOfTodo()
         {
             var todoService = (ITodoItemService)serviceProvider.GetService(typeof(ITodoItemService));
             var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
 
             var initialTitle = "Test todo 1";
-            var newId = await todoService.Create(initialTitle);
+            var newId = await mediator.Send(new CreateTodoItemCommand
+            {
+                Title = initialTitle
+            });
 
             var newTitle = "Test todo 2";
             await todoService.UpdateTitle(newId, newTitle);
@@ -65,7 +38,10 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
 
             var initialTitle = "Test todo";
-            var newId = await todoService.Create(initialTitle);
+            var newId = await mediator.Send(new CreateTodoItemCommand
+            {
+                Title = initialTitle
+            });
 
             await todoService.UpdateDone(newId, true);
 
@@ -82,7 +58,10 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems
             var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
 
             var initialTitle = "Test todo";
-            var newId = await todoService.Create(initialTitle);
+            var newId = await mediator.Send(new CreateTodoItemCommand
+            {
+                Title = initialTitle
+            });
 
             await todoService.UpdatePriority(newId, Domain.Enums.PriorityLevel.High);
 

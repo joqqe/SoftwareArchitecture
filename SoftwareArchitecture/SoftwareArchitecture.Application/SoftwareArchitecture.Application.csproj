@@ -16,8 +16,4 @@
     <ProjectReference Include="..\SoftwareArchitecture.Domain\SoftwareArchitecture.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TodoItems\Commands\" />
-  </ItemGroup>
-
 </Project>

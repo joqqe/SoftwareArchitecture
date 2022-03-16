@@ -16,37 +16,6 @@ namespace SoftwareArchitecture.Application.TodoItems
             this.context = context;
         }
 
-        public async Task<int> Create(string title)
-        {
-            TodoItemValidator.Title(title);
-
-            var entity = new TodoItem
-            {
-                Title = title,
-                Priority = PriorityLevel.None,
-                Done = false
-            };
-
-            context.TodoItems.Add(entity);
-
-            await context.SaveChangesAsync(default);
-
-            return entity.Id;
-        }
-
-        public async Task Delete(int id)
-        {
-            var entity = await context.TodoItems
-                .FindAsync(new object[] { id }, default);
-
-            if (entity == null)
-                throw new NotFoundException(nameof(TodoItem), id);
-
-            context.TodoItems.Remove(entity);
-
-            await context.SaveChangesAsync(default);
-        }
-
         public async Task UpdateTitle(int id, string title)
         {
             TodoItemValidator.Title(title);

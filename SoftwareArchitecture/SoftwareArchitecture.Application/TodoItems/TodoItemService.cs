@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
 using SoftwareArchitecture.Domain.Entities;
 using SoftwareArchitecture.Domain.Enums;
 using SoftwareArchitecture.Application.Common.Interfaces;
@@ -17,14 +14,6 @@ namespace SoftwareArchitecture.Application.TodoItems
         public TodoItemService(IApplicationDbContext context)
         {
             this.context = context;
-        }
-
-        public async Task<List<TodoItem>> GetAll()
-        {
-            return await context.TodoItems
-                .AsNoTracking()
-                .OrderBy(t => t.Priority)
-                .ToListAsync();
         }
 
         public async Task<int> Create(string title)

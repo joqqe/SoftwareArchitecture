@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using MediatR.Pipeline;
 using SoftwareArchitecture.Application.Common.Mappings;
+using SoftwareArchitecture.Application.Common.Logging;
 
 namespace SoftwareArchitecture.Application
 {
@@ -14,6 +15,7 @@ namespace SoftwareArchitecture.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
             return services;
         }

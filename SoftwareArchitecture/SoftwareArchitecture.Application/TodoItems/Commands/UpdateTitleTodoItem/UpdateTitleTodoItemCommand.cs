@@ -25,7 +25,6 @@ namespace SoftwareArchitecture.Application.TodoItems.Commands.UpdateTitleTodoIte
 
         public async Task<Unit> Handle(UpdateTitleTodoItemCommand request, CancellationToken cancellationToken)
         {
-            TodoItemValidator.Title(request.Title);
 
             var entity = await context.TodoItems
                 .FindAsync(new object[] { request.Id }, cancellationToken);

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NUnit.Framework;
-using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItemCommand;
+using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 using SoftwareArchitecture.Application.TodoItems.Commands.DeleteTodoItem;
 using SoftwareArchitecture.Application.TodoItems.Queries.GetTodoItems;
 using System.Linq;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NUnit.Framework;
 using SoftwareArchitecture.Application.TodoItems.Queries.GetTodoItems;
-using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItemCommand;
+using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 using SoftwareArchitecture.Application.TodoItems.Commands.UpdateTitleTodoItem;
 using SoftwareArchitecture.Application.TodoItems.Commands.UpdateDoneTodoItem;
 

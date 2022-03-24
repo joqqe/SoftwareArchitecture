@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using MediatR;
 using NUnit.Framework;
 using SoftwareArchitecture.Application.TodoItems.Queries.GetTodoItems;
-using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItemCommand;
+using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 using SoftwareArchitecture.Application.TodoItems.Commands.UpdateTitleTodoItem;
+using System.ComponentModel.DataAnnotations;
 
 namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems.Commands
 {
@@ -32,6 +33,29 @@ namespace SoftwareArchitecture.Application.IntegrationTests.TodoItems.Commands
                 .FirstOrDefault(x => x.Id == newId);
 
             Assert.AreSame(newTitle, actual.Title);
+        }
+
+        [Test]
+        public async Task ShouldThrowValidationException()
+        {
+            var mediator = (IMediator)serviceProvider.GetService(typeof(IMediator));
+
+            var initialTitle = "Test todo 1";
+            var newId = await mediator.Send(new CreateTodoItemCommand
+            {
+                Title = initialTitle
+            });
+
+            var newTitle = "Test todo Test todo Test todo Test todo Test todo Test todo Test todo" +
+                "Test todo Test todo Test todo Test todo Test todo Test todo Test todo Test todo" +
+                "Test todo Test todo Test todo Test todo Test todo Test todo Test todo Test todo";
+            var ex = Assert.ThrowsAsync<ValidationException>(async () => await mediator.Send(new UpdateTitleTodoItemCommand
+            {
+                Id = newId,
+                Title = newTitle
+            }));
+
+            Assert.AreSame(ex.Message, "Title should not exceed a character count of 200");
         }
     }
 }

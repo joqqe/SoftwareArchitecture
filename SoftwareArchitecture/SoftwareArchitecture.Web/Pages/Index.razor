@@ -1,0 +1,87 @@
+﻿@page "/"
+
+@using System.Text.Json
+@using MediatR
+@using SoftwareArchitecture.Application.TodoItems.Queries.GetTodoItems
+@using SoftwareArchitecture.Application.TodoItems.Commands.CreateTodoItem
+@using SoftwareArchitecture.Application.TodoItems.Commands.DeleteTodoItem
+@using SoftwareArchitecture.Application.TodoItems.Commands.UpdateDoneTodoItem
+
+@inject IMediator mediator
+<input type="text" @bind-value=@newTodoTitle />
+<button @onclick="async () => await AddTodo()">Add</button>
+
+<h2>Todos</h2>
+@if (todos == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    foreach (var todo in todos)
+    {
+        <p>
+            @if (@todo.Done)
+            {
+                <input type="checkbox" checked @onchange="async () => await MarkTodoDone(todo)" />
+            }
+            else
+            {
+                <input type="checkbox" @onchange="async () => await MarkTodoDone(todo)" />
+            }
+            @todo.Title
+            <button @onclick="async () => await DeleteTodo(todo.Id)">x</button>
+        </p>
+    }
+}
+
+@code {
+    private List<GetTodoItemDto> todos;
+    private string newTodoTitle = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetTodos();
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task GetTodos()
+    {
+        todos = await mediator.Send(new GetTodoItemsQuery())
+            ?? new List<GetTodoItemDto>();
+    }
+
+    private async Task AddTodo()
+    {
+        await mediator.Send(new CreateTodoItemCommand
+        {
+            Title = newTodoTitle
+        });
+
+        newTodoTitle = string.Empty;
+
+        await GetTodos();
+    }
+
+    private async Task DeleteTodo(int id)
+    {
+        await mediator.Send(new DeleteTodoItemCommand
+        {
+            Id = id
+        });
+
+        await GetTodos();
+    }
+
+    private async Task MarkTodoDone(GetTodoItemDto getTodoItemDto)
+    {
+        await mediator.Send(new UpdateDoneTodoItemCommand
+        {
+            Id = getTodoItemDto.Id,
+            Done = !getTodoItemDto.Done
+        });
+
+        await GetTodos();
+    }
+}

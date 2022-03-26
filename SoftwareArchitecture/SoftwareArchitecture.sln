@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareArchitecture.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareArchitecture.Infrastructure", "SoftwareArchitecture.Infrastructure\SoftwareArchitecture.Infrastructure.csproj", "{75FC6013-A7DE-4443-A62A-0A98EFABD287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareArchitecture.Application.IntegrationTests", "SoftwareArchitecture.Application.IntegrationTests\SoftwareArchitecture.Application.IntegrationTests.csproj", "{24A577E0-5F48-4889-9CA9-E4A16BDE2206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareArchitecture.Application.IntegrationTests", "SoftwareArchitecture.Application.IntegrationTests\SoftwareArchitecture.Application.IntegrationTests.csproj", "{24A577E0-5F48-4889-9CA9-E4A16BDE2206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareArchitecture.Application.UnitTests", "SoftwareArchitecture.Application.UnitTests\SoftwareArchitecture.Application.UnitTests.csproj", "{0AD72D93-2011-47C8-B153-8F21E9341D08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareArchitecture.Application.UnitTests", "SoftwareArchitecture.Application.UnitTests\SoftwareArchitecture.Application.UnitTests.csproj", "{0AD72D93-2011-47C8-B153-8F21E9341D08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareArchitecture.Domain.UnitTests", "SoftwareArchitecture.Domain.UnitTests\SoftwareArchitecture.Domain.UnitTests.csproj", "{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareArchitecture.Domain.UnitTests", "SoftwareArchitecture.Domain.UnitTests\SoftwareArchitecture.Domain.UnitTests.csproj", "{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareArchitecture.Web", "SoftwareArchitecture.Web\SoftwareArchitecture.Web.csproj", "{23A3060B-9BD1-432E-AD14-7C7A07B5A62D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A3060B-9BD1-432E-AD14-7C7A07B5A62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A3060B-9BD1-432E-AD14-7C7A07B5A62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A3060B-9BD1-432E-AD14-7C7A07B5A62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A3060B-9BD1-432E-AD14-7C7A07B5A62D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{24A577E0-5F48-4889-9CA9-E4A16BDE2206} = {ADB753BA-8F94-4BD4-82C2-B524FA5A7583}
 		{0AD72D93-2011-47C8-B153-8F21E9341D08} = {ADB753BA-8F94-4BD4-82C2-B524FA5A7583}
 		{ADA29C0D-83C8-4D76-8CB3-E3DDE2A57B3C} = {ADB753BA-8F94-4BD4-82C2-B524FA5A7583}
+		{23A3060B-9BD1-432E-AD14-7C7A07B5A62D} = {941B4180-C1F3-4F74-B2F4-35F098AD10E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CEA5AF3-DD76-4B7A-9F70-F2A4E6066BF1}
